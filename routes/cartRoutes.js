@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const Cart = require('../models/Cart');
+const Cart = require('../models/cart');
 // Add to cart: POST /api/cart/add
 // POST /api/cart/add
 router.post('/add', async (req, res) => {
