@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const User = require('../models/User');
 const Cart = require('../models/cart');
-const Order = require('../models/Order');
+const Order = require('../models/order');
 
 // POST /api/orders/place
 router.post('/place', async (req, res) => {
