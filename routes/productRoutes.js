@@ -4,6 +4,85 @@ const Category = require('../models/Category'); // Import Category model
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Products
+ *   description: API for managing products and categories
+ */
+
+/**
+ * @swagger
+ * /products:
+ *   post:
+ *     summary: Add a new product
+ *     tags: [Products]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - price
+ *               - category
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: Wireless Mouse
+ *               description:
+ *                 type: string
+ *                 example: A high-precision wireless mouse
+ *               price:
+ *                 type: number
+ *                 example: 29.99
+ *               category:
+ *                 type: string
+ *                 example: 6622f378b6eaa8001fe5f18d
+ *     responses:
+ *       201:
+ *         description: Product added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 product:
+ *                   $ref: '#/components/schemas/Product'
+ *       400:
+ *         description: Invalid category or data error
+ */
+
+
+/**
+ * @swagger
+ * /products:
+ *   get:
+ *     summary: Retrieve all products
+ *     tags: [Products]
+ *     responses:
+ *       200:
+ *         description: A list of products
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 products:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Product'
+ *       500:
+ *         description: Server error while fetching products
+ */
+
 // Add a new product
 router.post('/', async (req, res) => {
   try {

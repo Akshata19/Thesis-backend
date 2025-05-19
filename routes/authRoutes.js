@@ -7,6 +7,131 @@ const router = express.Router();
 // Secret key for JWT
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 
+/**
+ * @swagger
+ * tags:
+ *   name: Authentication
+ *   description: API for user registration, login, and token verification
+ */
+
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - username
+ *               - email
+ *               - password
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: priya123
+ *               email:
+ *                 type: string
+ *                 example: priya@example.com
+ *               password:
+ *                 type: string
+ *                 example: mysecurepassword
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: User already exists
+ *       500:
+ *         description: Error registering user
+ */
+
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Authenticate a user and return a JWT token
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: priya@example.com
+ *               password:
+ *                 type: string
+ *                 example: mysecurepassword
+ *     responses:
+ *       200:
+ *         description: Login successful, token returned
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 token:
+ *                   type: string
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                     username:
+ *                       type: string
+ *                     email:
+ *                       type: string
+ *       400:
+ *         description: Invalid email or password
+ *       500:
+ *         description: Server error during login
+ */
+
+
+/**
+ * @swagger
+ * /auth/verify:
+ *   get:
+ *     summary: Verify the validity of a JWT token
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Token is valid
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Token is valid.
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     username:
+ *                       type: string
+ *       401:
+ *         description: Invalid or missing token
+ */
+
+
 // Register a new user
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;

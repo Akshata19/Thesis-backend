@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const { swaggerUi, swaggerSpec } = require('./swagger');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,6 +35,12 @@ app.use('/api/users', userRoutes);
 
 const orderRoutes = require('./routes/orderRoutes');
 app.use('/api/orders', orderRoutes);
+
+// server.js (add below your existing routes)
+const feedbackRoutes = require('./routes/feedbackRoutes');
+app.use('/api/feedback', feedbackRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
